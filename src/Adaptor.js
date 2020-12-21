@@ -111,7 +111,7 @@ export function listContacts(id, params, callback) {
 }
 
 /**
- * Get a specific contact within an outbreak from a query filter
+ * Get one or multiple contacts within an outbreak from a query filter
  * @public
  * @example
  *  getContact("343d-dc3e", {"where":{"firstName": "Luca"}}, {}, state => {
@@ -289,7 +289,7 @@ export function listOutbreaks(params, callback) {
 }
 
 /**
- * Get a specific outbreak from a query filter
+ * Get one or multiple outbreaks from a query filter
  * @public
  * @example
  *  getOutbreak({"where":{"name": "Outbreak demo"}}, {}, state => {
@@ -457,7 +457,7 @@ export function listCases(id, params, callback) {
 }
 
 /**
- * Get a specific case within an outbreak from a query filter
+ * Get one or multiple cases within an outbreak from a query filter
  * @public
  * @example
  * getCase(
@@ -643,7 +643,7 @@ export function listLocations(params, callback) {
 }
 
 /**
- * Get a specific location from a query filter
+ * Get one or multiple locations from a query filter
  * @public
  * @example
  *  getLocation({"where":{"name": "30 DE OCTUBRE"}}, {}, state => {

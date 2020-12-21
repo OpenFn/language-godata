@@ -43,7 +43,7 @@ listOutbreaks({}, state => {
 
 ## Get a specific outbreak
 
-This function can be used to fetch one specific outbreak. A filtering mechanism is used to specify a criteria to match.
+This function can be used to fetch one specific outbreak. A filtering mechanism is used to specify a criteria to match. Mutliple outbreaks could be returned if matched by the filter.
 
 ```js
 getOutbreak({ where: { name: 'Outbreak demo' } }, {}, state => {
@@ -89,7 +89,7 @@ listCases('4c444f7-4e11-41d0-c1af-331dd15a892e', {}, state => {
 
 ## Get a specific case
 
-This function can be used to fetch one specific case for an outbreak. A filtering mechanism can specify a criteria to match.
+This function can be used to fetch one specific case for an outbreak. A filtering mechanism can specify a criteria to match. Mutliple cases could be returned if matched by the filter.
 
 ```js
 getCase(
@@ -135,7 +135,7 @@ listContacts('4c444f7-4e11-41d0-c1af-331dd15a892e', {}, state => {
 
 ## Get a specific contact
 
-This function can be used to get one specific contact for an outbreak. A filtering mechanism can specify a criteria to match.
+This function can be used to get one specific contact for an outbreak. A filtering mechanism can specify a criteria to match. Mutliple contacts could be returned if matched by the filter.
 
 ```js
 getContact('343d-dc3e', { where: { firstName: 'Luca' } }, {}, state => {
@@ -171,7 +171,7 @@ listLocations({}, state => {
 
 ## Get a specific location
 
-This function can be used to get one specific location. A filtering mechanism can specify a criteria to match.
+This function can be used to get one specific location. A filtering mechanism can specify a criteria to match. Mutliple locations could be returned if matched by the filter.
 
 ```js
 getLocation({ where: { name: '30 DE MAYO' } }, {}, state => {
