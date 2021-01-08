@@ -105,10 +105,6 @@ var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj &amp;&amp; obj.__esModule ? obj : { "default": obj }; }
 
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i &lt; sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i &lt; sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i &lt; arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -188,30 +184,22 @@ function logout(state) {
  * @public
  * @example
  *  listContacts("343d-dc3e", // Outbreak Id
- *    {}, state => {
+ *    state => {
  *       console.log(state);
  *    return state;
  *  });
  * @function
  * @param {string} id - Outbreak id
- * @param {object} params - Options, Headers parameters
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
 
 
-function listContacts(id, params, callback) {
+function listContacts(id, callback) {
   return function (state) {
     var _state$configuration3 = state.configuration,
         apiUrl = _state$configuration3.apiUrl,
         access_token = _state$configuration3.access_token;
-
-    var _expandReferences = (0, _languageCommon.expandReferences)(params)(state),
-        headers = _expandReferences.headers,
-        body = _expandReferences.body,
-        options = _expandReferences.options,
-        rest = _objectWithoutProperties(_expandReferences, ["headers", "body", "options"]);
-
     return (0, _axios["default"])({
       method: 'GET',
       baseURL: apiUrl,
@@ -230,34 +218,26 @@ function listContacts(id, params, callback) {
   };
 }
 /**
- * Get a specific contact within an outbreak from a query filter
+ * Get one or multiple contacts within an outbreak from a query filter
  * @public
  * @example
- *  getContact("343d-dc3e", {"where":{"firstName": "Luca"}}, {}, state => {
+ *  getContact("343d-dc3e", {"where":{"firstName": "Luca"}}, state => {
  *    console.log(state.data);
  *    return state;
  *  });
  * @function
  * @param {string} id - Outbreak id
  * @param {object} query - An object with a query filter parameter
- * @param {object} params - Options, Headers parameters
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
 
 
-function getContact(id, query, params, callback) {
+function getContact(id, query, callback) {
   return function (state) {
     var _state$configuration4 = state.configuration,
         apiUrl = _state$configuration4.apiUrl,
         access_token = _state$configuration4.access_token;
-
-    var _expandReferences2 = (0, _languageCommon.expandReferences)(params)(state),
-        headers = _expandReferences2.headers,
-        body = _expandReferences2.body,
-        options = _expandReferences2.options,
-        rest = _objectWithoutProperties(_expandReferences2, ["headers", "body", "options"]);
-
     var filter = JSON.stringify(query);
     return (0, _axios["default"])({
       baseURL: apiUrl,
@@ -281,36 +261,29 @@ function getContact(id, query, params, callback) {
  * Upsert contact to godata using an external id to match a specific record.
  * @public
  * @example
- *  upsertContact("4dce-3eedce3-rd33", 'visualId', {
- *    data: {
+ *  upsertContact("4dce-3eedce3-rd33", 'visualId', 
+ *    {
  *      firstName: 'Luca',
  *      gender: 'male',
  *      'age:years': '20'
  *      ...
- *    },
- *  })
+ *    }
+ *  )
  * @function
  * @param {string} id - Outbreak id
  * @param {string} externalId - External Id to match
- * @param {object} params - an object with an externalId and some case data.
+ * @param {object} goDataContact - an object with some case data.
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
 
 
-function upsertContact(id, externalId, params, callback) {
+function upsertContact(id, externalId, goDataContact, callback) {
   return function (state) {
     var _state$configuration5 = state.configuration,
         apiUrl = _state$configuration5.apiUrl,
         access_token = _state$configuration5.access_token;
-
-    var _expandReferences3 = (0, _languageCommon.expandReferences)(params)(state),
-        data = _expandReferences3.data,
-        headers = _expandReferences3.headers,
-        body = _expandReferences3.body,
-        options = _expandReferences3.options,
-        rest = _objectWithoutProperties(_expandReferences3, ["data", "headers", "body", "options"]);
-
+    var data = (0, _languageCommon.expandReferences)(goDataContact)(state);
     var query = {
       where: {}
     };
@@ -376,29 +349,21 @@ function upsertContact(id, externalId, params, callback) {
  * Fetch the list of outbreaks
  * @public
  * @example
- *  listOutbreaks({}, state => {
+ *  listOutbreaks(state => {
  *    console.log(state.data);
  *    return state;
  *  });
  * @function
- * @param {object} params - Options, Headers parameters
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
 
 
-function listOutbreaks(params, callback) {
+function listOutbreaks(callback) {
   return function (state) {
     var _state$configuration6 = state.configuration,
         apiUrl = _state$configuration6.apiUrl,
         access_token = _state$configuration6.access_token;
-
-    var _expandReferences4 = (0, _languageCommon.expandReferences)(params)(state),
-        headers = _expandReferences4.headers,
-        body = _expandReferences4.body,
-        options = _expandReferences4.options,
-        rest = _objectWithoutProperties(_expandReferences4, ["headers", "body", "options"]);
-
     return (0, _axios["default"])({
       method: 'GET',
       baseURL: apiUrl,
@@ -417,33 +382,25 @@ function listOutbreaks(params, callback) {
   };
 }
 /**
- * Get a specific outbreak from a query filter
+ * Get one or multiple outbreaks from a query filter
  * @public
  * @example
- *  getOutbreak({"where":{"name": "Outbreak demo"}}, {}, state => {
+ *  getOutbreak({"where":{"name": "Outbreak demo"}}, state => {
  *    console.log(state.data);
  *    return state;
  *  });
  * @function
  * @param {object} query - An object with a query filter parameter
- * @param {object} params - Options, Headers parameters
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
 
 
-function getOutbreak(query, params, callback) {
+function getOutbreak(query, callback) {
   return function (state) {
     var _state$configuration7 = state.configuration,
         apiUrl = _state$configuration7.apiUrl,
         access_token = _state$configuration7.access_token;
-
-    var _expandReferences5 = (0, _languageCommon.expandReferences)(params)(state),
-        headers = _expandReferences5.headers,
-        body = _expandReferences5.body,
-        options = _expandReferences5.options,
-        rest = _objectWithoutProperties(_expandReferences5, ["headers", "body", "options"]);
-
     var filter = JSON.stringify(query);
     return (0, _axios["default"])({
       method: 'GET',
@@ -469,25 +426,21 @@ function getOutbreak(query, params, callback) {
  * @example
  *  upsertOutbreak({externalId: "3dec33-ede3", data: {...}})
  * @function
- * @param {object} params - an object with an externalId and some case data.
+ * @param {object} outbreak - an object with an externalId and some outbreak data.
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
 
 
-function upsertOutbreak(params, callback) {
+function upsertOutbreak(outbreak, callback) {
   return function (state) {
     var _state$configuration8 = state.configuration,
         apiUrl = _state$configuration8.apiUrl,
         access_token = _state$configuration8.access_token;
 
-    var _expandReferences6 = (0, _languageCommon.expandReferences)(params)(state),
-        externalId = _expandReferences6.externalId,
-        data = _expandReferences6.data,
-        headers = _expandReferences6.headers,
-        body = _expandReferences6.body,
-        options = _expandReferences6.options,
-        rest = _objectWithoutProperties(_expandReferences6, ["externalId", "data", "headers", "body", "options"]);
+    var _expandReferences = (0, _languageCommon.expandReferences)(outbreak)(state),
+        externalId = _expandReferences.externalId,
+        data = _expandReferences.data;
 
     var filter = JSON.stringify({
       where: {
@@ -551,30 +504,22 @@ function upsertOutbreak(params, callback) {
  * Fetch the list of cases within a particular outbreak using its ID.
  * @public
  * @example
- *  listCases("343d-dc3e", {}, state => {
+ *  listCases("343d-dc3e", state => {
  *    console.log(state);
  *    return state;
  *  });
  * @function
  * @param {string} id - Outbreak id
- * @param {object} params - Options, Headers parameters
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
 
 
-function listCases(id, params, callback) {
+function listCases(id, callback) {
   return function (state) {
     var _state$configuration9 = state.configuration,
         apiUrl = _state$configuration9.apiUrl,
         access_token = _state$configuration9.access_token;
-
-    var _expandReferences7 = (0, _languageCommon.expandReferences)(params)(state),
-        headers = _expandReferences7.headers,
-        body = _expandReferences7.body,
-        options = _expandReferences7.options,
-        rest = _objectWithoutProperties(_expandReferences7, ["headers", "body", "options"]);
-
     return (0, _axios["default"])({
       method: 'GET',
       baseURL: apiUrl,
@@ -593,13 +538,12 @@ function listCases(id, params, callback) {
   };
 }
 /**
- * Get a specific case within an outbreak from a query filter
+ * Get one or multiple cases within an outbreak from a query filter
  * @public
  * @example
  * getCase(
  *    '3b55-cdf4',
  *    { 'where.relationship': { active: true }, where: { firstName: 'Luca'} },
- *    {},
  *    state => {
  *      console.log(state);
  *      return state;
@@ -608,24 +552,16 @@ function listCases(id, params, callback) {
  * @function
  * @param {string} id - Outbreak id
  * @param {object} query - An object with a query filter parameter
- * @param {object} params - Options, Headers parameters
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
 
 
-function getCase(id, query, params, callback) {
+function getCase(id, query, callback) {
   return function (state) {
     var _state$configuration10 = state.configuration,
         apiUrl = _state$configuration10.apiUrl,
         access_token = _state$configuration10.access_token;
-
-    var _expandReferences8 = (0, _languageCommon.expandReferences)(params)(state),
-        headers = _expandReferences8.headers,
-        body = _expandReferences8.body,
-        options = _expandReferences8.options,
-        rest = _objectWithoutProperties(_expandReferences8, ["headers", "body", "options"]);
-
     var filter = JSON.stringify(query);
     return (0, _axios["default"])({
       baseURL: apiUrl,
@@ -650,39 +586,31 @@ function getCase(id, query, params, callback) {
  * @public
  * @example
  *  upsertCase("4dce-3eedce3-rd33", 'visualId',
- *    { data: state => {
- *       const patient = state.data.body;
- *        return {
- *          firstName: patient.Patient_name.split(' ')[0],
- *          lastName: patient.Patient_name.split(' ')[1],
- *          visualId: patient.Case_ID,
- *          'age:years': patient.Age_in_year,
- *          gender: patient.Sex,
- *        };
- *    }
+ *    data: state => {
+ *      const patient = state.data.body;
+ *       return {
+ *         firstName: patient.Patient_name.split(' ')[0],
+ *         lastName: patient.Patient_name.split(' ')[1],
+ *         visualId: patient.Case_ID,
+ *         'age:years': patient.Age_in_year,
+ *         gender: patient.Sex,
+ *       };
  *  })
  * @function
  * @param {string} id - Outbreak id
  * @param {string} externalId - External Id to match
- * @param {object} params - an object with an externalId and some case data.
+ * @param {object} goDataCase - an object with some case data.
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
 
 
-function upsertCase(id, externalId, params, callback) {
+function upsertCase(id, externalId, goDataCase, callback) {
   return function (state) {
     var _state$configuration11 = state.configuration,
         apiUrl = _state$configuration11.apiUrl,
         access_token = _state$configuration11.access_token;
-
-    var _expandReferences9 = (0, _languageCommon.expandReferences)(params)(state),
-        data = _expandReferences9.data,
-        headers = _expandReferences9.headers,
-        body = _expandReferences9.body,
-        options = _expandReferences9.options,
-        rest = _objectWithoutProperties(_expandReferences9, ["data", "headers", "body", "options"]);
-
+    var data = (0, _languageCommon.expandReferences)(goDataCase)(state);
     var query = {
       where: {}
     };
@@ -702,6 +630,8 @@ function upsertCase(id, externalId, params, callback) {
       } else if (response.data.length === 1) {
         console.log('Case found. Performing update.');
         var caseId = response.data[0].id;
+        data['id'] = caseId;
+        delete data.visualId;
         return (0, _axios["default"])({
           method: 'PUT',
           baseURL: apiUrl,
@@ -747,29 +677,21 @@ function upsertCase(id, externalId, params, callback) {
  * Fetch the list of locations
  * @public
  * @example
- *  listLocations({}, state => {
+ *  listLocations(state => {
  *    console.log(state.data);
  *    return state;
  *  });
  * @function
- * @param {object} params - Options, Headers parameters
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
 
 
-function listLocations(params, callback) {
+function listLocations(callback) {
   return function (state) {
     var _state$configuration12 = state.configuration,
         apiUrl = _state$configuration12.apiUrl,
         access_token = _state$configuration12.access_token;
-
-    var _expandReferences10 = (0, _languageCommon.expandReferences)(params)(state),
-        headers = _expandReferences10.headers,
-        body = _expandReferences10.body,
-        options = _expandReferences10.options,
-        rest = _objectWithoutProperties(_expandReferences10, ["headers", "body", "options"]);
-
     return (0, _axios["default"])({
       method: 'GET',
       baseURL: apiUrl,
@@ -788,33 +710,25 @@ function listLocations(params, callback) {
   };
 }
 /**
- * Get a specific location from a query filter
+ * Get one or multiple locations from a query filter
  * @public
  * @example
- *  getLocation({"where":{"name": "30 DE OCTUBRE"}}, {}, state => {
+ *  getLocation({"where":{"name": "30 DE OCTUBRE"}}, state => {
  *    console.log(state.data);
  *    return state;
  *  });
  * @function
  * @param {object} query - An object with a query filter parameter
- * @param {object} params - Options, Headers parameters
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
 
 
-function getLocation(query, params, callback) {
+function getLocation(query, callback) {
   return function (state) {
     var _state$configuration13 = state.configuration,
         apiUrl = _state$configuration13.apiUrl,
         access_token = _state$configuration13.access_token;
-
-    var _expandReferences11 = (0, _languageCommon.expandReferences)(params)(state),
-        headers = _expandReferences11.headers,
-        body = _expandReferences11.body,
-        options = _expandReferences11.options,
-        rest = _objectWithoutProperties(_expandReferences11, ["headers", "body", "options"]);
-
     var filter = JSON.stringify(query);
     return (0, _axios["default"])({
       method: 'GET',
@@ -838,28 +752,21 @@ function getLocation(query, params, callback) {
  * Upsert location to godata
  * @public
  * @example
- *  upsertLocation('name', { data: {...}})
+ *  upsertLocation('name', {...})
  * @function
  * @param {string} externalId - External Id to match
- * @param {object} params - an object with an externalId and some case data.
+ * @param {object} goDataLocation - an object with some location data.
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
 
 
-function upsertLocation(externalId, params, callback) {
+function upsertLocation(externalId, goDataLocation, callback) {
   return function (state) {
     var _state$configuration14 = state.configuration,
         apiUrl = _state$configuration14.apiUrl,
         access_token = _state$configuration14.access_token;
-
-    var _expandReferences12 = (0, _languageCommon.expandReferences)(params)(state),
-        data = _expandReferences12.data,
-        headers = _expandReferences12.headers,
-        body = _expandReferences12.body,
-        options = _expandReferences12.options,
-        rest = _objectWithoutProperties(_expandReferences12, ["data", "headers", "body", "options"]);
-
+    var data = (0, _languageCommon.expandReferences)(goDataLocation)(state);
     var query = {
       where: {}
     };
@@ -940,7 +847,7 @@ exports.axios = _axios["default"]; // What functions do you want from the common
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Dec 21 2020 16:36:06 GMT+0000 (Greenwich Mean Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Fri Jan 08 2021 15:54:39 GMT+0000 (Greenwich Mean Time)
 </footer>
 
 <script> prettyPrint(); </script>

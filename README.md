@@ -35,7 +35,7 @@ in the field, to adapt to the wide range of outbreak scenarios.
 This function is used to fetch the whole list of outbreaks in Go.Data.
 
 ```js
-listOutbreaks({}, state => {
+listOutbreaks(state => {
   console.log(state.data);
   return state;
 });
@@ -46,7 +46,7 @@ listOutbreaks({}, state => {
 This function can be used to fetch one specific outbreak. A filtering mechanism is used to specify a criteria to match. Mutliple outbreaks could be returned if matched by the filter.
 
 ```js
-getOutbreak({ where: { name: 'Outbreak demo' } }, {}, state => {
+getOutbreak({ where: { name: 'Outbreak demo' } }, state => {
   console.log(state.data);
   return state;
 });
@@ -81,7 +81,7 @@ upsertOutbreak({
 This function is used to fetch the whole list of cases for a specific outbreak in Go.Data.
 
 ```js
-listCases('4c444f7-4e11-41d0-c1af-331dd15a892e', {}, state => {
+listCases('4c444f7-4e11-41d0-c1af-331dd15a892e', state => {
   console.log(state);
   return state;
 });
@@ -95,7 +95,6 @@ This function can be used to fetch one specific case for an outbreak. A filterin
 getCase(
   '4c444f7-4e11-41d0-c1af-331dd15a892e',
   { 'where.relationship': { active: true }, where: { firstName: 'Luca' } },
-  {},
   state => {
     console.log(state);
     return state;
@@ -108,7 +107,7 @@ getCase(
 This function is used to either update a case in Go.Data if matched or insert a new one if no record matched the unique id.
 
 ```js
-upsertCase('4dce-3eedce3-rd33', 'visualId', {
+upsertCase('4dce-3eedce3-rd33', 'visualId',
   data: state => {
     const patient = state.data.body;
     return {
@@ -118,8 +117,7 @@ upsertCase('4dce-3eedce3-rd33', 'visualId', {
       'age:years': patient.Age_in_year,
       gender: patient.Sex,
     };
-  },
-});
+  });
 ```
 
 ## Fetch the list of contacts
@@ -127,7 +125,7 @@ upsertCase('4dce-3eedce3-rd33', 'visualId', {
 This function is used to fetch the whole list of contacts for a specific outbreak in Go.Data.
 
 ```js
-listContacts('4c444f7-4e11-41d0-c1af-331dd15a892e', {}, state => {
+listContacts('4c444f7-4e11-41d0-c1af-331dd15a892e', state => {
   console.log(state);
   return state;
 });
@@ -138,7 +136,7 @@ listContacts('4c444f7-4e11-41d0-c1af-331dd15a892e', {}, state => {
 This function can be used to get one specific contact for an outbreak. A filtering mechanism can specify a criteria to match. Mutliple contacts could be returned if matched by the filter.
 
 ```js
-getContact('343d-dc3e', { where: { firstName: 'Luca' } }, {}, state => {
+getContact('343d-dc3e', { where: { firstName: 'Luca' } }, state => {
   console.log(state.data);
   return state;
 });
@@ -150,11 +148,9 @@ This function is used to either update a contact in Go.Data if matched or insert
 
 ```js
 upsertContact('4dce-3eedce3-rd33', 'visualId', {
-  data: {
-    firstName: 'Luca',
-    gender: 'male',
-    'age:years': '20',
-  },
+  firstName: 'Luca',
+  gender: 'male',
+  'age:years': '20',
 });
 ```
 
@@ -163,7 +159,7 @@ upsertContact('4dce-3eedce3-rd33', 'visualId', {
 This function is used to fetch the list of locations.
 
 ```js
-listLocations({}, state => {
+listLocations(state => {
   console.log(state);
   return state;
 });
@@ -174,7 +170,7 @@ listLocations({}, state => {
 This function can be used to get one specific location. A filtering mechanism can specify a criteria to match. Mutliple locations could be returned if matched by the filter.
 
 ```js
-getLocation({ where: { name: '30 DE MAYO' } }, {}, state => {
+getLocation({ where: { name: '30 DE MAYO' } }, state => {
   console.log(state.data);
   return state;
 });
@@ -186,16 +182,14 @@ This function is used to either update a location if matched or insert a new. A 
 
 ```js
 upsertLocation('name', {
-  data: {
-    name: '30 DE DECIEMBRE',
-    synonyms: [],
-    identifiers: [],
-    active: true,
-    populationDensity: 0,
-    geoLocation: {
-      lat: -45.343244,
-      lng: -67.193873,
-    },
+  name: '30 DE DECIEMBRE',
+  synonyms: [],
+  identifiers: [],
+  active: true,
+  populationDensity: 0,
+  geoLocation: {
+    lat: -45.343244,
+    lng: -67.193873,
   },
 });
 ```

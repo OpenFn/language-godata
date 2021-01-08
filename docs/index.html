@@ -68,14 +68,14 @@ in the field, to adapt to the wide range of outbreak scenarios.</p>
 </code></pre>
 <h2>Fetch the list of outbreaks</h2>
 <p>This function is used to fetch the whole list of outbreaks in Go.Data.</p>
-<pre class="prettyprint source lang-js"><code>listOutbreaks({}, state => {
+<pre class="prettyprint source lang-js"><code>listOutbreaks(state => {
   console.log(state.data);
   return state;
 });
 </code></pre>
 <h2>Get a specific outbreak</h2>
 <p>This function can be used to fetch one specific outbreak. A filtering mechanism is used to specify a criteria to match. Mutliple outbreaks could be returned if matched by the filter.</p>
-<pre class="prettyprint source lang-js"><code>getOutbreak({ where: { name: 'Outbreak demo' } }, {}, state => {
+<pre class="prettyprint source lang-js"><code>getOutbreak({ where: { name: 'Outbreak demo' } }, state => {
   console.log(state.data);
   return state;
 });
@@ -102,7 +102,7 @@ in the field, to adapt to the wide range of outbreak scenarios.</p>
 </code></pre>
 <h2>Fetch the list of cases</h2>
 <p>This function is used to fetch the whole list of cases for a specific outbreak in Go.Data.</p>
-<pre class="prettyprint source lang-js"><code>listCases('4c444f7-4e11-41d0-c1af-331dd15a892e', {}, state => {
+<pre class="prettyprint source lang-js"><code>listCases('4c444f7-4e11-41d0-c1af-331dd15a892e', state => {
   console.log(state);
   return state;
 });
@@ -112,7 +112,6 @@ in the field, to adapt to the wide range of outbreak scenarios.</p>
 <pre class="prettyprint source lang-js"><code>getCase(
   '4c444f7-4e11-41d0-c1af-331dd15a892e',
   { 'where.relationship': { active: true }, where: { firstName: 'Luca' } },
-  {},
   state => {
     console.log(state);
     return state;
@@ -121,7 +120,7 @@ in the field, to adapt to the wide range of outbreak scenarios.</p>
 </code></pre>
 <h2>Insert or Update a case using a unique id as a key</h2>
 <p>This function is used to either update a case in Go.Data if matched or insert a new one if no record matched the unique id.</p>
-<pre class="prettyprint source lang-js"><code>upsertCase('4dce-3eedce3-rd33', 'visualId', {
+<pre class="prettyprint source lang-js"><code>upsertCase('4dce-3eedce3-rd33', 'visualId',
   data: state => {
     const patient = state.data.body;
     return {
@@ -131,19 +130,18 @@ in the field, to adapt to the wide range of outbreak scenarios.</p>
       'age:years': patient.Age_in_year,
       gender: patient.Sex,
     };
-  },
-});
+  });
 </code></pre>
 <h2>Fetch the list of contacts</h2>
 <p>This function is used to fetch the whole list of contacts for a specific outbreak in Go.Data.</p>
-<pre class="prettyprint source lang-js"><code>listContacts('4c444f7-4e11-41d0-c1af-331dd15a892e', {}, state => {
+<pre class="prettyprint source lang-js"><code>listContacts('4c444f7-4e11-41d0-c1af-331dd15a892e', state => {
   console.log(state);
   return state;
 });
 </code></pre>
 <h2>Get a specific contact</h2>
 <p>This function can be used to get one specific contact for an outbreak. A filtering mechanism can specify a criteria to match. Mutliple contacts could be returned if matched by the filter.</p>
-<pre class="prettyprint source lang-js"><code>getContact('343d-dc3e', { where: { firstName: 'Luca' } }, {}, state => {
+<pre class="prettyprint source lang-js"><code>getContact('343d-dc3e', { where: { firstName: 'Luca' } }, state => {
   console.log(state.data);
   return state;
 });
@@ -151,23 +149,21 @@ in the field, to adapt to the wide range of outbreak scenarios.</p>
 <h2>Insert or Update a contact using a unique id as a key</h2>
 <p>This function is used to either update a contact in Go.Data if matched or insert a new one if no record matched the unique id.</p>
 <pre class="prettyprint source lang-js"><code>upsertContact('4dce-3eedce3-rd33', 'visualId', {
-  data: {
-    firstName: 'Luca',
-    gender: 'male',
-    'age:years': '20',
-  },
+  firstName: 'Luca',
+  gender: 'male',
+  'age:years': '20',
 });
 </code></pre>
 <h2>Fetch the list of locations</h2>
 <p>This function is used to fetch the list of locations.</p>
-<pre class="prettyprint source lang-js"><code>listLocations({}, state => {
+<pre class="prettyprint source lang-js"><code>listLocations(state => {
   console.log(state);
   return state;
 });
 </code></pre>
 <h2>Get a specific location</h2>
 <p>This function can be used to get one specific location. A filtering mechanism can specify a criteria to match. Mutliple locations could be returned if matched by the filter.</p>
-<pre class="prettyprint source lang-js"><code>getLocation({ where: { name: '30 DE MAYO' } }, {}, state => {
+<pre class="prettyprint source lang-js"><code>getLocation({ where: { name: '30 DE MAYO' } }, state => {
   console.log(state.data);
   return state;
 });
@@ -175,16 +171,14 @@ in the field, to adapt to the wide range of outbreak scenarios.</p>
 <h2>Insert or Update a location using a unique id as a key</h2>
 <p>This function is used to either update a location if matched or insert a new. A custom <code>externalId</code> can be provided.</p>
 <pre class="prettyprint source lang-js"><code>upsertLocation('name', {
-  data: {
-    name: '30 DE DECIEMBRE',
-    synonyms: [],
-    identifiers: [],
-    active: true,
-    populationDensity: 0,
-    geoLocation: {
-      lat: -45.343244,
-      lng: -67.193873,
-    },
+  name: '30 DE DECIEMBRE',
+  synonyms: [],
+  identifiers: [],
+  active: true,
+  populationDensity: 0,
+  geoLocation: {
+    lat: -45.343244,
+    lng: -67.193873,
   },
 });
 </code></pre>
@@ -208,7 +202,7 @@ in the field, to adapt to the wide range of outbreak scenarios.</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Dec 21 2020 16:36:06 GMT+0000 (Greenwich Mean Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Fri Jan 08 2021 15:54:39 GMT+0000 (Greenwich Mean Time)
 </footer>
 
 <script> prettyPrint(); </script>
