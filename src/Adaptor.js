@@ -80,15 +80,12 @@ function logout(state) {
  *  });
  * @function
  * @param {string} id - Outbreak id
- * @param {object} params - Options, Headers parameters
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
-export function listContacts(id, params, callback) {
+export function listContacts(id, callback) {
   return state => {
     const { apiUrl, access_token } = state.configuration;
-
-    const { headers, body, options, ...rest } = expandReferences(params)(state);
 
     return axios({
       method: 'GET',
@@ -121,15 +118,12 @@ export function listContacts(id, params, callback) {
  * @function
  * @param {string} id - Outbreak id
  * @param {object} query - An object with a query filter parameter
- * @param {object} params - Options, Headers parameters
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
-export function getContact(id, query, params, callback) {
+export function getContact(id, query, callback) {
   return state => {
     const { apiUrl, access_token } = state.configuration;
-
-    const { headers, body, options, ...rest } = expandReferences(params)(state);
 
     const filter = JSON.stringify(query);
 
@@ -169,17 +163,15 @@ export function getContact(id, query, params, callback) {
  * @function
  * @param {string} id - Outbreak id
  * @param {string} externalId - External Id to match
- * @param {object} params - an object with an externalId and some case data.
+ * @param {object} goDataContact - an object with an externalId and some case data.
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
-export function upsertContact(id, externalId, params, callback) {
+export function upsertContact(id, externalId, goDataContact, callback) {
   return state => {
     const { apiUrl, access_token } = state.configuration;
 
-    const { data, headers, body, options, ...rest } = expandReferences(params)(
-      state
-    );
+    const data = expandReferences(goDataContact)(state);
 
     const query = { where: {} };
     query.where[externalId] = data[externalId];
@@ -258,15 +250,12 @@ export function upsertContact(id, externalId, params, callback) {
  *    return state;
  *  });
  * @function
- * @param {object} params - Options, Headers parameters
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
-export function listOutbreaks(params, callback) {
+export function listOutbreaks(callback) {
   return state => {
     const { apiUrl, access_token } = state.configuration;
-
-    const { headers, body, options, ...rest } = expandReferences(params)(state);
 
     return axios({
       method: 'GET',
@@ -298,15 +287,12 @@ export function listOutbreaks(params, callback) {
  *  });
  * @function
  * @param {object} query - An object with a query filter parameter
- * @param {object} params - Options, Headers parameters
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
-export function getOutbreak(query, params, callback) {
+export function getOutbreak(query, callback) {
   return state => {
     const { apiUrl, access_token } = state.configuration;
-
-    const { headers, body, options, ...rest } = expandReferences(params)(state);
 
     const filter = JSON.stringify(query);
 
@@ -337,22 +323,15 @@ export function getOutbreak(query, params, callback) {
  * @example
  *  upsertOutbreak({externalId: "3dec33-ede3", data: {...}})
  * @function
- * @param {object} params - an object with an externalId and some case data.
+ * @param {object} outbreak - an object with an externalId and some case data.
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
-export function upsertOutbreak(params, callback) {
+export function upsertOutbreak(outbreak, callback) {
   return state => {
     const { apiUrl, access_token } = state.configuration;
 
-    const {
-      externalId,
-      data,
-      headers,
-      body,
-      options,
-      ...rest
-    } = expandReferences(params)(state);
+    const { externalId, data } = expandReferences(outbreak)(state);
 
     const filter = JSON.stringify({ where: { id: externalId } });
 
@@ -426,15 +405,12 @@ export function upsertOutbreak(params, callback) {
  *  });
  * @function
  * @param {string} id - Outbreak id
- * @param {object} params - Options, Headers parameters
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
-export function listCases(id, params, callback) {
+export function listCases(id, callback) {
   return state => {
     const { apiUrl, access_token } = state.configuration;
-
-    const { headers, body, options, ...rest } = expandReferences(params)(state);
 
     return axios({
       method: 'GET',
@@ -472,15 +448,12 @@ export function listCases(id, params, callback) {
  * @function
  * @param {string} id - Outbreak id
  * @param {object} query - An object with a query filter parameter
- * @param {object} params - Options, Headers parameters
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
-export function getCase(id, query, params, callback) {
+export function getCase(id, query, callback) {
   return state => {
     const { apiUrl, access_token } = state.configuration;
-
-    const { headers, body, options, ...rest } = expandReferences(params)(state);
 
     const filter = JSON.stringify(query);
 
@@ -524,17 +497,15 @@ export function getCase(id, query, params, callback) {
  * @function
  * @param {string} id - Outbreak id
  * @param {string} externalId - External Id to match
- * @param {object} params - an object with an externalId and some case data.
+ * @param {object} goDataCase - an object with an externalId and some case data.
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
-export function upsertCase(id, externalId, params, callback) {
+export function upsertCase(id, externalId, goDataCase, callback) {
   return state => {
     const { apiUrl, access_token } = state.configuration;
 
-    const { data, headers, body, options, ...rest } = expandReferences(params)(
-      state
-    );
+    const data = expandReferences(goDataCase)(state);
 
     const query = { where: {} };
     query.where[externalId] = data[externalId];
@@ -556,6 +527,8 @@ export function upsertCase(id, externalId, params, callback) {
         } else if (response.data.length === 1) {
           console.log('Case found. Performing update.');
           const caseId = response.data[0].id;
+          data['id'] = caseId;
+          delete data.visualId;
           return axios({
             method: 'PUT',
             baseURL: apiUrl,
@@ -612,15 +585,12 @@ export function upsertCase(id, externalId, params, callback) {
  *    return state;
  *  });
  * @function
- * @param {object} params - Options, Headers parameters
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
-export function listLocations(params, callback) {
+export function listLocations(callback) {
   return state => {
     const { apiUrl, access_token } = state.configuration;
-
-    const { headers, body, options, ...rest } = expandReferences(params)(state);
 
     return axios({
       method: 'GET',
@@ -652,15 +622,12 @@ export function listLocations(params, callback) {
  *  });
  * @function
  * @param {object} query - An object with a query filter parameter
- * @param {object} params - Options, Headers parameters
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
-export function getLocation(query, params, callback) {
+export function getLocation(query, callback) {
   return state => {
     const { apiUrl, access_token } = state.configuration;
-
-    const { headers, body, options, ...rest } = expandReferences(params)(state);
 
     const filter = JSON.stringify(query);
 
@@ -692,17 +659,15 @@ export function getLocation(query, params, callback) {
  *  upsertLocation('name', { data: {...}})
  * @function
  * @param {string} externalId - External Id to match
- * @param {object} params - an object with an externalId and some case data.
+ * @param {object} goDataLocation - an object with an externalId and some case data.
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
-export function upsertLocation(externalId, params, callback) {
+export function upsertLocation(externalId, goDataLocation, callback) {
   return state => {
     const { apiUrl, access_token } = state.configuration;
 
-    const { data, headers, body, options, ...rest } = expandReferences(params)(
-      state
-    );
+    const data = expandReferences(goDataLocation)(state);
 
     const query = { where: {} };
     query.where[externalId] = data[externalId];
