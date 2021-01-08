@@ -74,7 +74,7 @@ function logout(state) {
  * @public
  * @example
  *  listContacts("343d-dc3e", // Outbreak Id
- *    {}, state => {
+ *    state => {
  *       console.log(state);
  *    return state;
  *  });
@@ -111,7 +111,7 @@ export function listContacts(id, callback) {
  * Get one or multiple contacts within an outbreak from a query filter
  * @public
  * @example
- *  getContact("343d-dc3e", {"where":{"firstName": "Luca"}}, {}, state => {
+ *  getContact("343d-dc3e", {"where":{"firstName": "Luca"}}, state => {
  *    console.log(state.data);
  *    return state;
  *  });
@@ -152,18 +152,18 @@ export function getContact(id, query, callback) {
  * Upsert contact to godata using an external id to match a specific record.
  * @public
  * @example
- *  upsertContact("4dce-3eedce3-rd33", 'visualId', {
- *    data: {
+ *  upsertContact("4dce-3eedce3-rd33", 'visualId',
+ *    {
  *      firstName: 'Luca',
  *      gender: 'male',
  *      'age:years': '20'
  *      ...
- *    },
- *  })
+ *    }
+ *  )
  * @function
  * @param {string} id - Outbreak id
  * @param {string} externalId - External Id to match
- * @param {object} goDataContact - an object with an externalId and some case data.
+ * @param {object} goDataContact - an object with some case data.
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
@@ -245,7 +245,7 @@ export function upsertContact(id, externalId, goDataContact, callback) {
  * Fetch the list of outbreaks
  * @public
  * @example
- *  listOutbreaks({}, state => {
+ *  listOutbreaks(state => {
  *    console.log(state.data);
  *    return state;
  *  });
@@ -281,7 +281,7 @@ export function listOutbreaks(callback) {
  * Get one or multiple outbreaks from a query filter
  * @public
  * @example
- *  getOutbreak({"where":{"name": "Outbreak demo"}}, {}, state => {
+ *  getOutbreak({"where":{"name": "Outbreak demo"}}, state => {
  *    console.log(state.data);
  *    return state;
  *  });
@@ -323,7 +323,7 @@ export function getOutbreak(query, callback) {
  * @example
  *  upsertOutbreak({externalId: "3dec33-ede3", data: {...}})
  * @function
- * @param {object} outbreak - an object with an externalId and some case data.
+ * @param {object} outbreak - an object with an externalId and some outbreak data.
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
@@ -399,7 +399,7 @@ export function upsertOutbreak(outbreak, callback) {
  * Fetch the list of cases within a particular outbreak using its ID.
  * @public
  * @example
- *  listCases("343d-dc3e", {}, state => {
+ *  listCases("343d-dc3e", state => {
  *    console.log(state);
  *    return state;
  *  });
@@ -439,7 +439,6 @@ export function listCases(id, callback) {
  * getCase(
  *    '3b55-cdf4',
  *    { 'where.relationship': { active: true }, where: { firstName: 'Luca'} },
- *    {},
  *    state => {
  *      console.log(state);
  *      return state;
@@ -483,21 +482,20 @@ export function getCase(id, query, callback) {
  * @public
  * @example
  *  upsertCase("4dce-3eedce3-rd33", 'visualId',
- *    { data: state => {
- *       const patient = state.data.body;
- *        return {
- *          firstName: patient.Patient_name.split(' ')[0],
- *          lastName: patient.Patient_name.split(' ')[1],
- *          visualId: patient.Case_ID,
- *          'age:years': patient.Age_in_year,
- *          gender: patient.Sex,
- *        };
- *    }
+ *    data: state => {
+ *      const patient = state.data.body;
+ *       return {
+ *         firstName: patient.Patient_name.split(' ')[0],
+ *         lastName: patient.Patient_name.split(' ')[1],
+ *         visualId: patient.Case_ID,
+ *         'age:years': patient.Age_in_year,
+ *         gender: patient.Sex,
+ *       };
  *  })
  * @function
  * @param {string} id - Outbreak id
  * @param {string} externalId - External Id to match
- * @param {object} goDataCase - an object with an externalId and some case data.
+ * @param {object} goDataCase - an object with some case data.
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
@@ -580,7 +578,7 @@ export function upsertCase(id, externalId, goDataCase, callback) {
  * Fetch the list of locations
  * @public
  * @example
- *  listLocations({}, state => {
+ *  listLocations(state => {
  *    console.log(state.data);
  *    return state;
  *  });
@@ -616,7 +614,7 @@ export function listLocations(callback) {
  * Get one or multiple locations from a query filter
  * @public
  * @example
- *  getLocation({"where":{"name": "30 DE OCTUBRE"}}, {}, state => {
+ *  getLocation({"where":{"name": "30 DE OCTUBRE"}}, state => {
  *    console.log(state.data);
  *    return state;
  *  });
@@ -656,10 +654,10 @@ export function getLocation(query, callback) {
  * Upsert location to godata
  * @public
  * @example
- *  upsertLocation('name', { data: {...}})
+ *  upsertLocation('name', {...})
  * @function
  * @param {string} externalId - External Id to match
- * @param {object} goDataLocation - an object with an externalId and some case data.
+ * @param {object} goDataLocation - an object with some location data.
  * @param {function} callback - (Optional) Callback function
  * @returns {Operation}
  */
