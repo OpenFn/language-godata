@@ -101,7 +101,6 @@ export function listContacts(id, callback) {
         return nextState;
       })
       .catch(error => {
-        console.log(error);
         return error;
       });
   };
@@ -142,7 +141,6 @@ export function getContact(id, query, callback) {
         return nextState;
       })
       .catch(error => {
-        console.log(error);
         return error;
       });
   };
@@ -209,7 +207,6 @@ export function upsertContact(id, externalId, goDataContact, callback) {
               return nextState;
             })
             .catch(error => {
-              console.log(error);
               return error;
             });
         } else {
@@ -229,13 +226,11 @@ export function upsertContact(id, externalId, goDataContact, callback) {
               return nextState;
             })
             .catch(error => {
-              console.log(error);
               return error;
             });
         }
       })
       .catch(error => {
-        console.log(error);
         return error;
       });
   };
@@ -271,7 +266,6 @@ export function listOutbreaks(callback) {
         return nextState;
       })
       .catch(error => {
-        console.log(error);
         return error;
       });
   };
@@ -311,7 +305,6 @@ export function getOutbreak(query, callback) {
         return nextState;
       })
       .catch(error => {
-        console.log(error);
         return error;
       });
   };
@@ -363,7 +356,6 @@ export function upsertOutbreak(outbreak, callback) {
               return nextState;
             })
             .catch(error => {
-              console.log(error);
               return error;
             });
         } else {
@@ -383,13 +375,11 @@ export function upsertOutbreak(outbreak, callback) {
               return nextState;
             })
             .catch(error => {
-              console.log(error);
               return error;
             });
         }
       })
       .catch(error => {
-        console.log(error);
         return error;
       });
   };
@@ -426,7 +416,6 @@ export function listCases(id, callback) {
         return nextState;
       })
       .catch(error => {
-        console.log(error);
         return error;
       });
   };
@@ -471,7 +460,6 @@ export function getCase(id, query, callback) {
         return nextState;
       })
       .catch(error => {
-        console.log(error);
         return error;
       });
   };
@@ -542,7 +530,6 @@ export function upsertCase(id, externalId, goDataCase, callback) {
               return nextState;
             })
             .catch(error => {
-              console.log(error);
               return error;
             });
         } else {
@@ -562,13 +549,11 @@ export function upsertCase(id, externalId, goDataCase, callback) {
               return nextState;
             })
             .catch(error => {
-              console.log(error);
               return error;
             });
         }
       })
       .catch(error => {
-        console.log(error);
         return error;
       });
   };
@@ -604,7 +589,6 @@ export function listLocations(callback) {
         return nextState;
       })
       .catch(error => {
-        console.log(error);
         return error;
       });
   };
@@ -644,7 +628,6 @@ export function getLocation(query, callback) {
         return nextState;
       })
       .catch(error => {
-        console.log(error);
         return error;
       });
   };
@@ -706,7 +689,6 @@ export function upsertLocation(externalId, goDataLocation, callback) {
               return nextState;
             })
             .catch(error => {
-              console.log(error);
               return error;
             });
         } else {
@@ -726,13 +708,11 @@ export function upsertLocation(externalId, goDataLocation, callback) {
               return nextState;
             })
             .catch(error => {
-              console.log(error);
               return error;
             });
         }
       })
       .catch(error => {
-        console.log(error);
         return error;
       });
   };
