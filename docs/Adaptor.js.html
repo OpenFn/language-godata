@@ -44,6 +44,9 @@ exports.upsertCase = upsertCase;
 exports.listLocations = listLocations;
 exports.getLocation = getLocation;
 exports.upsertLocation = upsertLocation;
+exports.listReferenceData = listReferenceData;
+exports.getReferenceData = getReferenceData;
+exports.upsertReferenceData = upsertReferenceData;
 Object.defineProperty(exports, "alterState", {
   enumerable: true,
   get: function get() {
@@ -212,7 +215,6 @@ function listContacts(id, callback) {
       if (callback) return callback(nextState);
       return nextState;
     })["catch"](function (error) {
-      console.log(error);
       return error;
     });
   };
@@ -252,7 +254,6 @@ function getContact(id, query, callback) {
       if (callback) return callback(nextState);
       return nextState;
     })["catch"](function (error) {
-      console.log(error);
       return error;
     });
   };
@@ -261,7 +262,7 @@ function getContact(id, query, callback) {
  * Upsert contact to godata using an external id to match a specific record.
  * @public
  * @example
- *  upsertContact("4dce-3eedce3-rd33", 'visualId', 
+ *  upsertContact("4dce-3eedce3-rd33", 'visualId',
  *    {
  *      firstName: 'Luca',
  *      gender: 'male',
@@ -317,7 +318,6 @@ function upsertContact(id, externalId, goDataContact, callback) {
           if (callback) return callback(nextState);
           return nextState;
         })["catch"](function (error) {
-          console.log(error);
           return error;
         });
       } else {
@@ -335,12 +335,10 @@ function upsertContact(id, externalId, goDataContact, callback) {
           if (callback) return callback(nextState);
           return nextState;
         })["catch"](function (error) {
-          console.log(error);
           return error;
         });
       }
     })["catch"](function (error) {
-      console.log(error);
       return error;
     });
   };
@@ -376,7 +374,6 @@ function listOutbreaks(callback) {
       if (callback) return callback(nextState);
       return nextState;
     })["catch"](function (error) {
-      console.log(error);
       return error;
     });
   };
@@ -415,7 +412,6 @@ function getOutbreak(query, callback) {
       if (callback) return callback(nextState);
       return nextState;
     })["catch"](function (error) {
-      console.log(error);
       return error;
     });
   };
@@ -472,7 +468,6 @@ function upsertOutbreak(outbreak, callback) {
           if (callback) return callback(nextState);
           return nextState;
         })["catch"](function (error) {
-          console.log(error);
           return error;
         });
       } else {
@@ -490,12 +485,10 @@ function upsertOutbreak(outbreak, callback) {
           if (callback) return callback(nextState);
           return nextState;
         })["catch"](function (error) {
-          console.log(error);
           return error;
         });
       }
     })["catch"](function (error) {
-      console.log(error);
       return error;
     });
   };
@@ -532,7 +525,6 @@ function listCases(id, callback) {
       if (callback) return callback(nextState);
       return nextState;
     })["catch"](function (error) {
-      console.log(error);
       return error;
     });
   };
@@ -576,7 +568,6 @@ function getCase(id, query, callback) {
       if (callback) return callback(nextState);
       return nextState;
     })["catch"](function (error) {
-      console.log(error);
       return error;
     });
   };
@@ -645,7 +636,6 @@ function upsertCase(id, externalId, goDataCase, callback) {
           if (callback) return callback(nextState);
           return nextState;
         })["catch"](function (error) {
-          console.log(error);
           return error;
         });
       } else {
@@ -663,12 +653,10 @@ function upsertCase(id, externalId, goDataCase, callback) {
           if (callback) return callback(nextState);
           return nextState;
         })["catch"](function (error) {
-          console.log(error);
           return error;
         });
       }
     })["catch"](function (error) {
-      console.log(error);
       return error;
     });
   };
@@ -704,7 +692,6 @@ function listLocations(callback) {
       if (callback) return callback(nextState);
       return nextState;
     })["catch"](function (error) {
-      console.log(error);
       return error;
     });
   };
@@ -743,7 +730,6 @@ function getLocation(query, callback) {
       if (callback) return callback(nextState);
       return nextState;
     })["catch"](function (error) {
-      console.log(error);
       return error;
     });
   };
@@ -800,7 +786,6 @@ function upsertLocation(externalId, goDataLocation, callback) {
           if (callback) return callback(nextState);
           return nextState;
         })["catch"](function (error) {
-          console.log(error);
           return error;
         });
       } else {
@@ -818,12 +803,161 @@ function upsertLocation(externalId, goDataLocation, callback) {
           if (callback) return callback(nextState);
           return nextState;
         })["catch"](function (error) {
-          console.log(error);
           return error;
         });
       }
     })["catch"](function (error) {
-      console.log(error);
+      return error;
+    });
+  };
+}
+/**
+ * Fetch the list of reference data
+ * @public
+ * @example
+ *  listReferenceData(state => {
+ *    console.log(state.data);
+ *    return state;
+ *  });
+ * @function
+ * @param {function} callback - (Optional) Callback function
+ * @returns {Operation}
+ */
+
+
+function listReferenceData(callback) {
+  return function (state) {
+    var _state$configuration15 = state.configuration,
+        apiUrl = _state$configuration15.apiUrl,
+        access_token = _state$configuration15.access_token;
+    return (0, _axios["default"])({
+      method: 'GET',
+      baseURL: apiUrl,
+      url: '/reference-data',
+      params: {
+        access_token: access_token
+      }
+    }).then(function (response) {
+      var nextState = (0, _languageCommon.composeNextState)(state, response.data);
+      if (callback) return callback(nextState);
+      return nextState;
+    })["catch"](function (error) {
+      return error;
+    });
+  };
+}
+/**
+ * Get one or multiple reference data from a query filter
+ * @public
+ * @example
+ *  getReferenceData({"where":{"categoryId": "LNG_REFERENCE_DATA_CATEGORY_CENTRE_NAME"}}, state => {
+ *    console.log(state.data);
+ *    return state;
+ *  });
+ * @function
+ * @param {object} query - An object with a query filter parameter
+ * @param {function} callback - (Optional) Callback function
+ * @returns {Operation}
+ */
+
+
+function getReferenceData(query, callback) {
+  return function (state) {
+    var _state$configuration16 = state.configuration,
+        apiUrl = _state$configuration16.apiUrl,
+        access_token = _state$configuration16.access_token;
+    var filter = JSON.stringify(query);
+    return (0, _axios["default"])({
+      method: 'GET',
+      baseURL: apiUrl,
+      url: '/reference-data',
+      params: {
+        filter: filter,
+        access_token: access_token
+      }
+    }).then(function (response) {
+      var nextState = (0, _languageCommon.composeNextState)(state, response.data);
+      if (callback) return callback(nextState);
+      return nextState;
+    })["catch"](function (error) {
+      return error;
+    });
+  };
+}
+/**
+ * Upsert reference data to godata
+ * @public
+ * @example
+ *  upsertReferenceData('id', {...})
+ * @function
+ * @param {string} externalId - External Id to match
+ * @param {object} goDataReferenceData - an object with some reference data.
+ * @param {function} callback - (Optional) Callback function
+ * @returns {Operation}
+ */
+
+
+function upsertReferenceData(externalId, goDataReferenceData, callback) {
+  return function (state) {
+    var _state$configuration17 = state.configuration,
+        apiUrl = _state$configuration17.apiUrl,
+        access_token = _state$configuration17.access_token;
+    var data = (0, _languageCommon.expandReferences)(goDataReferenceData)(state);
+    var query = {
+      where: {}
+    };
+    query.where[externalId] = data[externalId];
+    var filter = JSON.stringify(query);
+    return (0, _axios["default"])({
+      method: 'GET',
+      baseURL: apiUrl,
+      url: '/reference-data',
+      params: {
+        filter: filter,
+        access_token: access_token
+      }
+    }).then(function (response) {
+      if (response.data.length > 1) {
+        console.log(response.data.length, 'reference data found; aborting upsert.');
+        return response;
+      } else if (response.data.length === 1) {
+        console.log('Reference data found. Performing update.');
+        var referenceDataId = response.data[0].id;
+        console.log('referenceDataId', referenceDataId);
+        return (0, _axios["default"])({
+          method: 'PUT',
+          baseURL: apiUrl,
+          url: "/reference-data/".concat(referenceDataId),
+          params: {
+            access_token: access_token
+          },
+          data: data
+        }).then(function (response) {
+          var nextState = (0, _languageCommon.composeNextState)(state, response.data);
+          if (callback) return callback(nextState);
+          return nextState;
+        })["catch"](function (error) {
+          return error;
+        });
+      } else {
+        console.log('No reference data found. Performing create.');
+        return (0, _axios["default"])({
+          method: 'POST',
+          baseURL: apiUrl,
+          url: '/reference-data',
+          params: {
+            access_token: access_token
+          },
+          data: data
+        }).then(function (response) {
+          var nextState = (0, _languageCommon.composeNextState)(state, response.data);
+          if (callback) return callback(nextState);
+          return nextState;
+        })["catch"](function (error) {
+          return error;
+        });
+      }
+    })["catch"](function (error) {
       return error;
     });
   };
@@ -841,13 +975,13 @@ exports.axios = _axios["default"]; // What functions do you want from the common
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="execute.html">execute</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getCase">getCase</a></li><li><a href="global.html#getContact">getContact</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#getOutbreak">getOutbreak</a></li><li><a href="global.html#listCases">listCases</a></li><li><a href="global.html#listContacts">listContacts</a></li><li><a href="global.html#listLocations">listLocations</a></li><li><a href="global.html#listOutbreaks">listOutbreaks</a></li><li><a href="global.html#upsertCase">upsertCase</a></li><li><a href="global.html#upsertContact">upsertContact</a></li><li><a href="global.html#upsertLocation">upsertLocation</a></li><li><a href="global.html#upsertOutbreak">upsertOutbreak</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="execute.html">execute</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getCase">getCase</a></li><li><a href="global.html#getContact">getContact</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#getOutbreak">getOutbreak</a></li><li><a href="global.html#getReferenceData">getReferenceData</a></li><li><a href="global.html#listCases">listCases</a></li><li><a href="global.html#listContacts">listContacts</a></li><li><a href="global.html#listLocations">listLocations</a></li><li><a href="global.html#listOutbreaks">listOutbreaks</a></li><li><a href="global.html#listReferenceData">listReferenceData</a></li><li><a href="global.html#upsertCase">upsertCase</a></li><li><a href="global.html#upsertContact">upsertContact</a></li><li><a href="global.html#upsertLocation">upsertLocation</a></li><li><a href="global.html#upsertOutbreak">upsertOutbreak</a></li><li><a href="global.html#upsertReferenceData">upsertReferenceData</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Fri Jan 08 2021 15:54:39 GMT+0000 (Greenwich Mean Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Jan 18 2021 20:08:06 GMT+0000 (Greenwich Mean Time)
 </footer>
 
 <script> prettyPrint(); </script>

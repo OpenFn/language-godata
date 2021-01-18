@@ -251,7 +251,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line532">line 532</a>
+        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line524">line 524</a>
     </li></ul></dd>
     
 
@@ -464,7 +464,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line208">line 208</a>
+        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line210">line 210</a>
     </li></ul></dd>
     
 
@@ -650,7 +650,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line699">line 699</a>
+        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line686">line 686</a>
     </li></ul></dd>
     
 
@@ -836,7 +836,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line371">line 371</a>
+        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line368">line 368</a>
     </li></ul></dd>
     
 
@@ -886,6 +886,192 @@
     <h5>Example</h5>
     
     <pre class="prettyprint"><code>getOutbreak({"where":{"name": "Outbreak demo"}}, state => {
+   console.log(state.data);
+   return state;
+ });</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getReferenceData"><span class="type-signature"></span>getReferenceData<span class="signature">(query, callback)</span><span class="type-signature"> &rarr; {Operation}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get one or multiple reference data from a query filter
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>query</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">An object with a query filter parameter</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">(Optional) Callback function</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line836">line 836</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Operation</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>getReferenceData({"where":{"categoryId": "LNG_REFERENCE_DATA_CATEGORY_CENTRE_NAME"}}, state => {
    console.log(state.data);
    return state;
  });</code></pre>
@@ -1022,7 +1208,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line490">line 490</a>
+        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line483">line 483</a>
     </li></ul></dd>
     
 
@@ -1208,7 +1394,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line170">line 170</a>
+        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line173">line 173</a>
     </li></ul></dd>
     
 
@@ -1372,7 +1558,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line662">line 662</a>
+        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line650">line 650</a>
     </li></ul></dd>
     
 
@@ -1535,7 +1721,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line334">line 334</a>
+        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line332">line 332</a>
     </li></ul></dd>
     
 
@@ -1585,6 +1771,169 @@
     <h5>Example</h5>
     
     <pre class="prettyprint"><code>listOutbreaks(state => {
+   console.log(state.data);
+   return state;
+ });</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="listReferenceData"><span class="type-signature"></span>listReferenceData<span class="signature">(callback)</span><span class="type-signature"> &rarr; {Operation}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fetch the list of reference data
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">(Optional) Callback function</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line800">line 800</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Operation</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>listReferenceData(state => {
    console.log(state.data);
    return state;
  });</code></pre>
@@ -1767,7 +2116,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line580">line 580</a>
+        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line571">line 571</a>
     </li></ul></dd>
     
 
@@ -2006,7 +2355,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line253">line 253</a>
+        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line254">line 254</a>
     </li></ul></dd>
     
 
@@ -2055,7 +2404,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>upsertContact("4dce-3eedce3-rd33", 'visualId', 
+    <pre class="prettyprint"><code>upsertContact("4dce-3eedce3-rd33", 'visualId',
    {
      firstName: 'Luca',
      gender: 'male',
@@ -2219,7 +2568,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line736">line 736</a>
+        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line722">line 722</a>
     </li></ul></dd>
     
 
@@ -2402,7 +2751,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line407">line 407</a>
+        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line403">line 403</a>
     </li></ul></dd>
     
 
@@ -2456,6 +2805,212 @@
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="upsertReferenceData"><span class="type-signature"></span>upsertReferenceData<span class="signature">(externalId, goDataReferenceData, callback)</span><span class="type-signature"> &rarr; {Operation}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Upsert reference data to godata
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>externalId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">External Id to match</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>goDataReferenceData</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an object with some reference data.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">(Optional) Callback function</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line872">line 872</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Operation</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>upsertReferenceData('id', {...})</code></pre>
+
+
+
+        
     
 
     
@@ -2471,13 +3026,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="execute.html">execute</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getCase">getCase</a></li><li><a href="global.html#getContact">getContact</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#getOutbreak">getOutbreak</a></li><li><a href="global.html#listCases">listCases</a></li><li><a href="global.html#listContacts">listContacts</a></li><li><a href="global.html#listLocations">listLocations</a></li><li><a href="global.html#listOutbreaks">listOutbreaks</a></li><li><a href="global.html#upsertCase">upsertCase</a></li><li><a href="global.html#upsertContact">upsertContact</a></li><li><a href="global.html#upsertLocation">upsertLocation</a></li><li><a href="global.html#upsertOutbreak">upsertOutbreak</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="execute.html">execute</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getCase">getCase</a></li><li><a href="global.html#getContact">getContact</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#getOutbreak">getOutbreak</a></li><li><a href="global.html#getReferenceData">getReferenceData</a></li><li><a href="global.html#listCases">listCases</a></li><li><a href="global.html#listContacts">listContacts</a></li><li><a href="global.html#listLocations">listLocations</a></li><li><a href="global.html#listOutbreaks">listOutbreaks</a></li><li><a href="global.html#listReferenceData">listReferenceData</a></li><li><a href="global.html#upsertCase">upsertCase</a></li><li><a href="global.html#upsertContact">upsertContact</a></li><li><a href="global.html#upsertLocation">upsertLocation</a></li><li><a href="global.html#upsertOutbreak">upsertOutbreak</a></li><li><a href="global.html#upsertReferenceData">upsertReferenceData</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Fri Jan 08 2021 15:54:39 GMT+0000 (Greenwich Mean Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Jan 18 2021 20:08:06 GMT+0000 (Greenwich Mean Time)
 </footer>
 
 <script> prettyPrint(); </script>

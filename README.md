@@ -194,6 +194,51 @@ upsertLocation('name', {
 });
 ```
 
+## Fetch the list of reference data
+
+This function is used to fetch the list of reference data.
+
+```js
+listReferenceData(state => {
+  console.log(state);
+  return state;
+});
+```
+
+## Get a specific reference data
+
+This function can be used to get one specific reference data. A filtering mechanism can specify a criteria to match.
+
+```js
+getReferenceData(
+  { where: { categoryId: 'LNG_REFERENCE_DATA_CATEGORY_CENTRE_NAME' } },
+  state => {
+    console.log(state.data);
+    return state;
+  }
+);
+```
+
+## Insert or Update a reference data using a unique id as a key
+
+This function is used to either update a location if matched or insert a new. A custom `externalId` can be provided.
+
+```js
+upsertReferenceData('id', {
+  categoryId: 'CATEGORY',
+  value: 'VALUE',
+  readOnly: false,
+  active: true,
+  id: 'ID',
+  createdAt: '2020-10-01T18:48:31.784Z',
+  createdBy: '95d31ea9',
+  updatedAt: '2020-10-01T18:48:31.784Z',
+  updatedBy: '95d31ea9',
+  createdOn: 'API',
+  deleted: false,
+});
+```
+
 ## Development
 
 Clone the repo, run `npm install`.
