@@ -1,4 +1,9 @@
-# language-godata [<img src="https://avatars2.githubusercontent.com/u/9555108?s=200&v=4)" alt="alt text" height="20">](https://www.openfn.org) [![Build Status](https://travis-ci.org/OpenFn/language-godata.svg?branch=master)](https://travis-ci.org/OpenFn/language-godata)
+# _⚠️ MOVED TO [OpenFn/adaptors](https://github.com/OpenFn/adaptors)! ⚠️_
+
+**N.B.: New versions are available at:
+https://github.com/OpenFn/adaptors/tree/main/packages/godata**
+
+# Language Godata (Archived) [<img src="https://avatars2.githubusercontent.com/u/9555108?s=200&v=4)" alt="alt text" height="20">](https://www.openfn.org) [![Build Status](https://travis-ci.org/OpenFn/language-godata.svg?branch=master)](https://travis-ci.org/OpenFn/language-godata)
 
 <img src="https://github.com/OpenFn/language-godata/raw/master/logo.png" alt="alt text" height="50">
 
