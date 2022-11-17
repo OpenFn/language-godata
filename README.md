@@ -16,11 +16,7 @@ in the field, to adapt to the wide range of outbreak scenarios.
 - View the documentation at https://openfn.github.io/language-godata/
 - To update the documentation site, run: `./node_modules/.bin/jsdoc --readme ./README.md ./lib -d docs`
 
-## Helper Functions
-
-### post(...)
-
-#### sample configuration
+### sample configuration
 
 ```json
 {
@@ -29,6 +25,10 @@ in the field, to adapt to the wide range of outbreak scenarios.
   "apiUrl": "https://www.who-godata.com/api"
 }
 ```
+
+## Helper Functions
+
+### post(...)
 
 ## Fetch the list of outbreaks
 
